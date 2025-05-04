@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111;
+      background-color: #111;
       color: #eee;
       margin: 0;
       padding: 0;
@@ -18,134 +18,136 @@
     }
     header h1 {
       margin: 0;
-      font-size: 2em;
     }
     .tagline {
+      color: #ffc0c0;
       font-size: 0.9em;
-      color: #ffcccc;
     }
     nav {
       display: flex;
       justify-content: center;
-      background-color: #222;
-      padding: 10px 0;
+      background: #222;
     }
     nav button {
-      margin: 0 10px;
+      margin: 10px;
       padding: 10px 20px;
-      background-color: #444;
+      background: #444;
       color: white;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
+      border-radius: 5px;
     }
     nav button.active {
       background-color: #b30000;
     }
-    .container {
+    .tab {
+      display: none;
       max-width: 800px;
-      margin: 40px auto;
+      margin: auto;
       padding: 20px;
-      background: #222;
-      border-radius: 8px;
     }
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 12px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 10px;
-      font-family: monospace;
-    }
-    button.stream-btn {
-      padding: 10px 20px;
-      background-color: #b30000;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
+    .tab.active {
+      display: block;
     }
     iframe, video, audio {
       width: 100%;
-      margin-top: 20px;
-      border: none;
+      margin: 20px 0;
       background: black;
+      border: none;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #ff9999;
     }
     footer {
       text-align: center;
+      color: #999;
       padding: 20px;
-      font-size: 0.8em;
-      color: #aaa;
-    }
-    .hidden {
-      display: none;
+      background: #111;
+      border-top: 1px solid #333;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Scamazon Crime Media</h1>
-    <p class="tagline">Music. Movies. TV. Definitely Public Domain (Probably).</p>
-  </header>
+<header>
+  <h1>Scamazon Crime Media</h1>
+  <p class="tagline">Music. Movies. TV. Definitely Public Domain (Probably).</p>
+</header>
 
-  <nav>
-    <button onclick="switchTab('videoTab')" id="videoBtn" class="active">🎥 Video</button>
-    <button onclick="switchTab('musicTab')" id="musicBtn">🎵 Music</button>
-  </nav>
+<nav>
+  <button class="active" onclick="showTab('video')">🎬 Videos</button>
+  <button onclick="showTab('music')">🎵 Music</button>
+  <button onclick="showTab('originals')">🔥 Originals</button>
+</nav>
 
-  <div class="container" id="videoTab">
-    <h2>Paste Video Embed Code</h2>
-    <textarea id="videoEmbedCode" placeholder="Paste iframe, video, or any valid embed code..."></textarea>
-    <button class="stream-btn" onclick="embedContent('videoEmbedCode', 'playerContainer')">Play Video</button>
-    <div id="playerContainer"></div>
+<div class="tab active" id="video">
+  <section>
+    <h2>Featured Public Domain Videos</h2>
 
-    <hr style="margin-top:40px; border-color:#444;">
+    <!-- Paste your video embeds here -->
+    <iframe src="https://www.youtube.com/embed/kPRA0W1kECg" allowfullscreen></iframe>
 
-    <h2>📺 Scamazon Originals</h2>
-    <div style="background:#1a1a1a; padding:15px; border-radius:5px; margin-top:10px;">
-      <h3 style="color:#ff9999;">Coming APRIL 26TH 2026:</h3>
-      <p style="font-size:1.2em;"><strong><em>Invunarable</em></strong> — A Scamazon Original Series.<br>
-      So unlicensed, it's unstoppable.</p>
-    </div>
-  </div>
+    <video controls>
+      <source src="https://archive.org/download/CharadeCaryGrantAudreyHepburn/Charade.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-  <div class="container hidden" id="musicTab">
-    <h2>Paste Music Embed Code</h2>
-    <textarea id="musicEmbedCode" placeholder="Paste audio or iframe code..."></textarea>
-    <button class="stream-btn" onclick="embedContent('musicEmbedCode', 'musicPlayerContainer')">Play Music</button>
-    <div id="musicPlayerContainer"></div>
-  </div>
+    <!-- Add more video embeds here -->
+  </section>
+</div>
 
-  <footer>
-    <p>Scamazon Crime Media™ — A Division of Scamazon Shopping Inc.</p>
-    <p>Only public domain content allowed. Viewer discretion is legally irrelevant.</p>
-  </footer>
+<div class="tab" id="music">
+  <section>
+    <h2>Public Domain Music</h2>
 
-  <script>
-    function embedContent(textareaId, containerId) {
-      const html = document.getElementById(textareaId).value;
-      const container = document.getElementById(containerId);
-      container.innerHTML = html;
-    }
+    <!-- Paste your music embeds or audio files here -->
+    <audio controls>
+      <source src="https://archive.org/download/BeethovenSymphony5/Beethoven_Symphony_5.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
 
-    function switchTab(tabId) {
-      document.getElementById('videoTab').classList.add('hidden');
-      document.getElementById('musicTab').classList.add('hidden');
-      document.getElementById(tabId).classList.remove('hidden');
+    <audio controls>
+      <source src="https://archive.org/download/publicdomainaudiofile.mp3" type="audio/mpeg">
+    </audio>
 
-      document.getElementById('videoBtn').classList.remove('active');
-      document.getElementById('musicBtn').classList.remove('active');
-      if (tabId === 'videoTab') {
-        document.getElementById('videoBtn').classList.add('active');
-      } else {
-        document.getElementById('musicBtn').classList.add('active');
-      }
-    }
-  </script>
+    <!-- Add more music here -->
+  </section>
+</div>
+
+<div class="tab" id="originals">
+  <section>
+    <h2>🎬 Scamazon Originals</h2>
+    <p><strong>Coming APRIL 26TH 2026:</strong></p>
+    <p style="font-size:1.2em;"><em>Invunarable</em> — A Scamazon Original Series.<br>
+      So unlicensed, it’s unstoppable.</p>
+    
+    <!-- Future originals can be added below -->
+  </section>
+</div>
+
+<footer>
+  <p>Scamazon Crime Media™ — A Division of Scamazon Shopping Inc.</p>
+  <p>All content is believed to be public domain. If not, that’s a you problem.</p>
+</footer>
+
+<script>
+  function showTab(tabId) {
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
+
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    const idx = { video: 0, music: 1, originals: 2 };
+    document.querySelectorAll('nav button')[idx[tabId]].classList.add('active');
+  }
+</script>
 
 </body>
 </html>
+
