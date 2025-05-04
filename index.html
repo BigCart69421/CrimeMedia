@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scamazon Crime Media</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #b30000;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .tagline {
+      font-size: 0.9em;
+      color: #ffcccc;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+      padding: 10px 0;
+    }
+    nav button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    nav button.active {
+      background-color: #b30000;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #222;
+      border-radius: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 10px;
+      font-family: monospace;
+    }
+    button.stream-btn {
+      padding: 10px 20px;
+      background-color: #b30000;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    iframe, video, audio {
+      width: 100%;
+      margin-top: 20px;
+      border: none;
+      background: black;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Scamazon Crime Media</h1>
+    <p class="tagline">Music. Movies. TV. Definitely Public Domain (Probably).</p>
+  </header>
+
+  <nav>
+    <button onclick="switchTab('videoTab')" id="videoBtn" class="active">🎥 Video</button>
+    <button onclick="switchTab('musicTab')" id="musicBtn">🎵 Music</button>
+  </nav>
+
+  <div class="container" id="videoTab">
+    <h2>Paste Video Embed Code</h2>
+    <textarea id="videoEmbedCode" placeholder="Paste iframe, video, or any valid embed code..."></textarea>
+    <button class="stream-btn" onclick="embedContent('videoEmbedCode', 'playerContainer')">Play Video</button>
+    <div id="playerContainer"></div>
+
+    <hr style="margin-top:40px; border-color:#444;">
+
+    <h2>📺 Scamazon Originals</h2>
+    <div style="background:#1a1a1a; padding:15px; border-radius:5px; margin-top:10px;">
+      <h3 style="color:#ff9999;">Coming APRIL 26TH 2026:</h3>
+      <p style="font-size:1.2em;"><strong><em>Invunarable</em></strong> — A Scamazon Original Series.<br>
+      So unlicensed, it's unstoppable.</p>
+    </div>
+  </div>
+
+  <div class="container hidden" id="musicTab">
+    <h2>Paste Music Embed Code</h2>
+    <textarea id="musicEmbedCode" placeholder="Paste audio or iframe code..."></textarea>
+    <button class="stream-btn" onclick="embedContent('musicEmbedCode', 'musicPlayerContainer')">Play Music</button>
+    <div id="musicPlayerContainer"></div>
+  </div>
+
+  <footer>
+    <p>Scamazon Crime Media™ — A Division of Scamazon Shopping Inc.</p>
+    <p>Only public domain content allowed. Viewer discretion is legally irrelevant.</p>
+  </footer>
+
+  <script>
+    function embedContent(textareaId, containerId) {
+      const html = document.getElementById(textareaId).value;
+      const container = document.getElementById(containerId);
+      container.innerHTML = html;
+    }
+
+    function switchTab(tabId) {
+      document.getElementById('videoTab').classList.add('hidden');
+      document.getElementById('musicTab').classList.add('hidden');
+      document.getElementById(tabId).classList.remove('hidden');
+
+      document.getElementById('videoBtn').classList.remove('active');
+      document.getElementById('musicBtn').classList.remove('active');
+      if (tabId === 'videoTab') {
+        document.getElementById('videoBtn').classList.add('active');
+      } else {
+        document.getElementById('musicBtn').classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>
